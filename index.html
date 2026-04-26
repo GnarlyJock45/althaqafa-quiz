@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>اختبار مقرر الثقافة الإسلامية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Reem+Kufi:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #0d2b2b;
+    --bg-mid: #14403c;
+    --bg-soft: #1b524d;
+    --paper: #faf6ed;
+    --paper-dim: #f0e9d6;
+    --ink: #1a1a1a;
+    --ink-soft: #4a4a4a;
+    --gold: #c9a14a;
+    --gold-bright: #e8c068;
+    --emerald: #2d6e64;
+    --emerald-deep: #1a4d45;
+    --crimson: #a8443a;
+    --success: #4a7c59;
+    --error: #b45142;
+    --shadow-lg: 0 25px 60px -20px rgba(0,0,0,0.5);
+    --shadow-md: 0 12px 30px -12px rgba(0,0,0,0.35);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; }
+  body {
+    font-family: 'Tajawal', 'Reem Kufi', sans-serif;
+    background: var(--bg-deep);
+    background-image:
+      radial-gradient(ellipse at top right, rgba(201,161,74,0.08), transparent 50%),
+      radial-gradient(ellipse at bottom left, rgba(45,110,100,0.15), transparent 50%);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Geometric pattern overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(201,161,74,0.025) 35px, rgba(201,161,74,0.025) 36px),
+      repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(201,161,74,0.025) 35px, rgba(201,161,74,0.025) 36px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Card */
+  .card {
+    background: var(--paper);
+    border-radius: 4px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 0% 0%, rgba(201,161,74,0.06), transparent 30%),
+      radial-gradient(circle at 100% 100%, rgba(45,110,100,0.05), transparent 30%);
+    pointer-events: none;
+  }
+  .card-inner {
+    padding: 3rem 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Decorative double border */
+  .card-frame {
+    position: absolute;
+    inset: 12px;
+    border: 1px solid var(--gold);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .card-frame::before, .card-frame::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border: 1.5px solid var(--gold);
+  }
+  .card-frame::before { top: -6px; right: -6px; border-bottom: none; border-left: none; }
+  .card-frame::after { bottom: -6px; left: -6px; border-top: none; border-right: none; }
+
+  /* Typography */
+  .display {
+    font-family: 'Amiri', serif;
+    font-weight: 700;
+  }
+  .ornament {
+    text-align: center;
+    color: var(--gold);
+    font-size: 1.5rem;
+    letter-spacing: 0.5em;
+    margin-bottom: 0.5rem;
+    user-select: none;
+  }
+  .ornament::before { content: '۞'; }
+
+  /* START SCREEN */
+  .start-screen {
+    text-align: center;
+    padding: 1rem 0;
+  }
+  .start-screen .label {
+    font-family: 'Reem Kufi', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 0.75rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .start-screen h1 {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 700;
+    color: var(--bg-deep);
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+  }
+  .start-screen .subtitle {
+    color: var(--emerald-deep);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+  }
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-top: 1px solid rgba(201,161,74,0.3);
+    border-bottom: 1px solid rgba(201,161,74,0.3);
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Amiri', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--emerald-deep);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin-top: 0.3rem;
+  }
+
+  .lecture-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.5rem;
+    margin: 1.5rem 0 2rem;
+    text-align: right;
+  }
+  .lecture-list h3 {
+    grid-column: 1/-1;
+    font-family: 'Reem Kufi', sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  .lecture-pill {
+    background: rgba(45,110,100,0.08);
+    border: 1px solid rgba(45,110,100,0.15);
+    padding: 0.5rem 0.7rem;
+    border-radius: 2px;
+    font-size: 0.85rem;
+    color: var(--emerald-deep);
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  /* Mode selector */
+  .mode-selector {
+    margin: 1.5rem 0;
+  }
+  .mode-selector .mode-label {
+    font-family: 'Reem Kufi', sans-serif;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+  .mode-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .mode-btn {
+    background: transparent;
+    border: 1px solid rgba(45,110,100,0.3);
+    padding: 0.6rem 1.2rem;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.95rem;
+    color: var(--emerald-deep);
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .mode-btn:hover {
+    background: rgba(45,110,100,0.06);
+  }
+  .mode-btn.active {
+    background: var(--emerald-deep);
+    color: var(--paper);
+    border-color: var(--emerald-deep);
+  }
+
+  /* Buttons */
+  .btn {
+    font-family: 'Reem Kufi', sans-serif;
+    border: none;
+    cursor: pointer;
+    padding: 1rem 2.5rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    border-radius: 2px;
+    transition: all 0.25s ease;
+    letter-spacing: 0.05em;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary {
+    background: var(--bg-deep);
+    color: var(--gold-bright);
+    border: 1px solid var(--gold);
+  }
+  .btn-primary:hover {
+    background: var(--gold);
+    color: var(--bg-deep);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--emerald-deep);
+    border: 1px solid var(--emerald-deep);
+  }
+  .btn-secondary:hover {
+    background: var(--emerald-deep);
+    color: var(--paper);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink-soft);
+    border: 1px solid rgba(0,0,0,0.15);
+    padding: 0.6rem 1.4rem;
+    font-size: 0.9rem;
+  }
+  .btn-ghost:hover {
+    background: rgba(0,0,0,0.04);
+    color: var(--ink);
+  }
+
+  /* QUIZ SCREEN */
+  .quiz-screen { display: none; }
+  .quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(201,161,74,0.3);
+  }
+  .question-counter {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    color: var(--emerald-deep);
+  }
+  .question-counter strong {
+    font-size: 1.6rem;
+    color: var(--bg-deep);
+    margin-left: 0.3rem;
+  }
+  .lecture-tag {
+    background: var(--bg-deep);
+    color: var(--gold-bright);
+    padding: 0.3rem 0.9rem;
+    border-radius: 2px;
+    font-size: 0.78rem;
+    font-family: 'Reem Kufi', sans-serif;
+    letter-spacing: 0.05em;
+  }
+
+  .progress-bar {
+    height: 3px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+    transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+    width: 0%;
+  }
+
+  .question-text {
+    font-family: 'Amiri', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--bg-deep);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    padding: 1.2rem 1.5rem;
+    background: rgba(201,161,74,0.05);
+    border-right: 3px solid var(--gold);
+    border-radius: 2px;
+  }
+
+  .options { display: flex; flex-direction: column; gap: 0.7rem; }
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.3rem;
+    background: var(--paper-dim);
+    border: 1px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.05rem;
+    color: var(--ink);
+    text-align: right;
+    line-height: 1.5;
+  }
+  .option:hover:not(.disabled) {
+    background: #ebe2c8;
+    border-color: var(--gold);
+    transform: translateX(-4px);
+  }
+  .option-letter {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--emerald-deep);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-family: 'Amiri', serif;
+    font-weight: 700;
+    color: var(--emerald-deep);
+    background: var(--paper);
+    font-size: 1rem;
+  }
+  .option-text { flex: 1; }
+  .option.disabled { cursor: not-allowed; }
+  .option.correct {
+    background: rgba(74,124,89,0.15);
+    border-color: var(--success);
+    color: var(--success);
+  }
+  .option.correct .option-letter {
+    background: var(--success);
+    color: white;
+    border-color: var(--success);
+  }
+  .option.incorrect {
+    background: rgba(180,81,66,0.12);
+    border-color: var(--error);
+    color: var(--error);
+  }
+  .option.incorrect .option-letter {
+    background: var(--error);
+    color: white;
+    border-color: var(--error);
+  }
+
+  .feedback {
+    margin-top: 1.5rem;
+    padding: 1rem 1.3rem;
+    border-radius: 3px;
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    display: none;
+    animation: slideIn 0.3s ease;
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .feedback.show { display: block; }
+  .feedback.correct {
+    background: rgba(74,124,89,0.1);
+    color: var(--success);
+    border-right: 3px solid var(--success);
+  }
+  .feedback.incorrect {
+    background: rgba(180,81,66,0.08);
+    color: var(--error);
+    border-right: 3px solid var(--error);
+  }
+  .feedback-icon { font-size: 1.4rem; margin-left: 0.5rem; }
+  .feedback-source {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    font-family: 'Tajawal', sans-serif;
+  }
+
+  .quiz-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(201,161,74,0.2);
+  }
+  .score-tracker {
+    font-family: 'Amiri', serif;
+    color: var(--ink-soft);
+    font-size: 1rem;
+  }
+  .score-tracker .score-num {
+    color: var(--emerald-deep);
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  /* RESULTS SCREEN */
+  .results-screen { display: none; text-align: center; }
+  .results-ornament {
+    font-size: 3rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .results-screen h2 {
+    font-family: 'Amiri', serif;
+    font-size: 2rem;
+    color: var(--bg-deep);
+    margin-bottom: 0.5rem;
+  }
+  .results-grade {
+    font-family: 'Amiri', serif;
+    font-size: 1.15rem;
+    color: var(--emerald-deep);
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+  .results-score {
+    margin: 2rem auto;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle, var(--paper) 60%, transparent 60%),
+      conic-gradient(var(--gold) 0% var(--score-percent, 0%), rgba(0,0,0,0.08) 0%);
+    display: grid;
+    place-items: center;
+    position: relative;
+  }
+  .results-score::after {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .results-score-inner {
+    text-align: center;
+  }
+  .results-score-num {
+    font-family: 'Amiri', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--bg-deep);
+    line-height: 1;
+  }
+  .results-score-total {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin-top: 0.4rem;
+  }
+  .results-actions {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  .review-section {
+    margin-top: 2.5rem;
+    text-align: right;
+    border-top: 1px solid rgba(201,161,74,0.3);
+    padding-top: 2rem;
+  }
+  .review-section h3 {
+    font-family: 'Amiri', serif;
+    color: var(--bg-deep);
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1.4rem;
+  }
+  .review-item {
+    background: var(--paper-dim);
+    padding: 1rem 1.2rem;
+    margin-bottom: 0.8rem;
+    border-radius: 3px;
+    border-right: 3px solid;
+    font-size: 0.95rem;
+  }
+  .review-item.correct { border-color: var(--success); }
+  .review-item.incorrect { border-color: var(--error); }
+  .review-q {
+    font-family: 'Amiri', serif;
+    font-weight: 700;
+    color: var(--bg-deep);
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+  .review-a {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.2rem;
+  }
+  .review-a strong { color: var(--ink); }
+  .review-correct { color: var(--success); }
+  .review-incorrect { color: var(--error); }
+
+  /* Skip during review mode */
+  .keyboard-hint {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    opacity: 0.7;
+  }
+  .keyboard-hint kbd {
+    background: var(--paper-dim);
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 2px;
+    padding: 0.1rem 0.4rem;
+    font-family: monospace;
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 1rem 0.5rem; }
+    .card-inner { padding: 2rem 1.3rem; }
+    .stats-row { grid-template-columns: 1fr; gap: 0.5rem; padding: 1rem; }
+    .stat-num { font-size: 1.5rem; }
+    .question-text { font-size: 1.15rem; padding: 1rem; }
+    .option { padding: 0.85rem 1rem; font-size: 0.98rem; }
+    .quiz-header { flex-direction: column; gap: 0.8rem; align-items: flex-start; }
+    .results-score { width: 160px; height: 160px; }
+    .results-score-num { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="card">
+    <div class="card-frame"></div>
+    <div class="card-inner">
+
+      <!-- START SCREEN -->
+      <div class="start-screen" id="startScreen">
+        <div class="ornament"></div>
+        <div class="label">جامعة الملك فيصل</div>
+        <h1>اختبار مقرر الثقافة الإسلامية</h1>
+        <div class="subtitle">تجميعات الأسئلة المحلولة — أكثر من ١٣٠ سؤالاً</div>
+
+        <div class="stats-row">
+          <div class="stat">
+            <div class="stat-num" id="totalQuestions">134</div>
+            <div class="stat-label">سؤالاً</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">١٤</div>
+            <div class="stat-label">محاضرة</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">٢٠٢٥</div>
+            <div class="stat-label">سنة المقرر</div>
+          </div>
+        </div>
+
+        <div class="mode-selector">
+          <div class="mode-label">اختر نمط الاختبار</div>
+          <div class="mode-buttons">
+            <button class="mode-btn active" data-mode="all">جميع الأسئلة</button>
+            <button class="mode-btn" data-mode="20">٢٠ سؤالاً مختاراً</button>
+            <button class="mode-btn" data-mode="50">٥٠ سؤالاً</button>
+          </div>
+        </div>
+
+        <div class="mode-selector">
+          <div class="mode-label">ترتيب الأسئلة</div>
+          <div class="mode-buttons">
+            <button class="mode-btn active" data-order="ordered">حسب المحاضرة</button>
+            <button class="mode-btn" data-order="shuffled">عشوائي</button>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="startQuiz()">ابدأ الاختبار</button>
+
+        <div class="keyboard-hint">
+          استخدم <kbd>1</kbd>–<kbd>4</kbd> للإجابة، <kbd>↵</kbd> للسؤال التالي
+        </div>
+      </div>
+
+      <!-- QUIZ SCREEN -->
+      <div class="quiz-screen" id="quizScreen">
+        <div class="quiz-header">
+          <div class="question-counter">
+            السؤال <strong id="currentQ">1</strong> / <span id="totalQ">134</span>
+          </div>
+          <div class="lecture-tag" id="lectureTag">المحاضرة الأولى</div>
+        </div>
+
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+        <div class="question-text" id="questionText"></div>
+        <div class="options" id="optionsContainer"></div>
+        <div class="feedback" id="feedback"></div>
+
+        <div class="quiz-footer">
+          <div class="score-tracker">
+            النتيجة: <span class="score-num" id="liveScore">0</span> / <span id="liveTotal">0</span>
+          </div>
+          <button class="btn btn-secondary" id="nextBtn" onclick="nextQuestion()" style="display:none;">السؤال التالي ←</button>
+        </div>
+      </div>
+
+      <!-- RESULTS SCREEN -->
+      <div class="results-screen" id="resultsScreen">
+        <div class="results-ornament">۞</div>
+        <h2>انتهى الاختبار</h2>
+        <div class="results-grade" id="gradeText"></div>
+
+        <div class="results-score" id="resultsScore">
+          <div class="results-score-inner">
+            <div class="results-score-num" id="finalScore">0</div>
+            <div class="results-score-total">من <span id="finalTotal">0</span></div>
+          </div>
+        </div>
+
+        <div class="results-actions">
+          <button class="btn btn-primary" onclick="restartQuiz()">اختبار جديد</button>
+          <button class="btn btn-ghost" onclick="toggleReview()" id="reviewBtn">مراجعة الإجابات</button>
+        </div>
+
+        <div class="review-section" id="reviewSection" style="display:none;">
+          <h3>مراجعة الأسئلة</h3>
+          <div id="reviewList"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const QUESTIONS = [
+  // ===== Lecture 1 =====
+  {l:"المحاضرة الأولى",q:"تستعمل كلمة الثقافة عربياً:",o:["في الدلالة المعنوية الثابتة فقط","في الدلالة على الأمور الحسية والمعنوية","في الدلالة على ما هو حسي غالباً","في الدلالة الحسية الواضحة فقط"],a:1,s:"المحاضرة 1 صفحة 5"},
+  {l:"المحاضرة الأولى",q:"تستعمل كلمة ثقافة في اللسان العربي للتعبير عن كل ما هو:",o:["حسي","عقلي","حسي وعقلي","كل ما سبق غير صحيح"],a:2,s:"المحاضرة 1 صفحة 5"},
+  {l:"المحاضرة الأولى",q:"اشتقت كلمة الثقافة في اللغة من معاني أهمها:",o:["الفطرة السليمة","القوة والصلابة","الحذق والفطنة","الحدس والدهاء"],a:2,s:"المحاضرة 1 صفحة 5"},
+  {l:"المحاضرة الأولى",q:"{ مَلْعُونِينَ أَيْنَمَا ثُقِفُوا أُخِذُوا وَقُتِّلُوا تَقْتِيلا }:",o:["ثقفوا بمعنى سرعة أخذ العلم","ثقفوا بمعنى تقويم المعوج من الأشياء","ثقفوا بمعنى أخذوا وأدركوا وظفر بهم","ثقفوا بمعنى فهموا مراد الله تعالى منهم"],a:2,s:"المحاضرة 1 صفحة 5"},
+  {l:"المحاضرة الأولى",q:"إن محاولة تحديد مفهوم اصطلاحي للثقافة يعد أمراً صعباً بسبب أن كلمة الثقافة:",o:["ذات أبعاد كبيرة، ودلالات واسعة","من الألفاظ المعنوية التي يصعب تحديدها","مصطلح حديث تعددت اجتهادات العلماء والمفكرين حوله","كل ما سبق"],a:3,s:"المحاضرة 1 صفحة 8"},
+  {l:"المحاضرة الأولى",q:"اعتبر ابن خلدون الإنسان ذا القدرات اللغوية والمعنوية:",o:["مثقفاً","عالماً","ذكياً","مبرمجاً"],a:0,s:"المحاضرة 1 صفحة 9"},
+  {l:"المحاضرة الأولى",q:"أول من استعمل مصطلح الثقافة من العرب هو:",o:["ابن خلدون","سلامة موسى","عباس العقاد","المتنبي"],a:0,s:"المحاضرة 1 صفحة 9"},
+  {l:"المحاضرة الأولى",q:"أول من استعمل لفظة الثقافة في العصر الحديث عام ١٩٢٧م:",o:["أحمد أمين","أحمد شوقي","حافظ أمين","سلامة موسى"],a:3,s:"المحاضرة 1 صفحة 10"},
+  {l:"المحاضرة الأولى",q:"مجموعة الصفات الخلقية والقيم الاجتماعية التي تؤثر في الفرد منذ ولادته وتصبح لا شعورياً العلاقة التي تربط سلوكه بأسلوب الحياة في الوسط الذي ولد فيه؛ هذا تعريف الثقافة عند:",o:["مالك بن نبي","ول ديورانت","تايلور","علماء الغرب"],a:0,s:"المحاضرة 1 صفحة 10"},
+  {l:"المحاضرة الأولى",q:"تعريف ........... للثقافة هو \"ذلك الكل المركب الذي ينطوي على المعرفة والعقائد والفن والأخلاق والقانون والعرف والعادات وغير ذلك من القدرات\":",o:["تايلور","اليونسكو","جيمس","ليس مما سبق"],a:0,s:"المحاضرة 1 صفحة 11"},
+  {l:"المحاضرة الأولى",q:"معرفة ....... الأمة الإسلامية العامة بتفاعلاتها في الماضي والحاضر، من دين، ولغة، وتاريخ، وحضارة، وقيم وأهداف مشتركة:",o:["مقومات","اعتقادات","تطلعات","توجهات"],a:0,s:"المحاضرة 1 صفحة 14"},
+  {l:"المحاضرة الأولى",q:"معرفة مقومات الأمة الإسلامية العامة بتفاعلاتها في الماضي والحاضر من دين ولغة وتاريخ وحضارة وقيم وأهداف مشتركة؛ هو تعريف:",o:["الثقافة الإسلامية","الصهيونية","الكونفوشيوسية","اليهودية"],a:0,s:"المحاضرة 1 صفحة 14"},
+  {l:"المحاضرة الأولى",q:"العلم بمنهاج الإسلام الشمولي في القيم، والنظم، والفكر، ونقد التراث الإنساني فيها:",o:["الثقافة الشرقية","الثقافة الإسلامية","الثقافة السائدة","الثقافة المنتشرة"],a:1,s:"المحاضرة 1 صفحة 14"},
+  {l:"المحاضرة الأولى",q:"من تعاريف الثقافة الإسلامية اصطلاحاً هو:",o:["العلم بمنهاج الإسلام الشمولي في القيم والنظم والفكر ونقد التراث الإنساني فيها","ما تقوم به المنظمات الدينية من تعليم الدين ونشره","الرجوع عن الشيء إلى الشيء","إعمال النظر والتأمل في مجموعة من المعارف لغرض الوصول إلى معرفة جديدة"],a:0,s:"المحاضرة 1 صفحة 14"},
+  {l:"المحاضرة الأولى",q:"عرفت الثقافة الإسلامية بأنها: \"العلم بمنهاج الإسلام ........... في القيم، والنظم، والفكر، ونقد التراث الإنساني فيها\":",o:["الشمولي","الفرداني","الثنائي","الجزئي"],a:0,s:"المحاضرة 1 صفحة 14"},
+  {l:"المحاضرة الأولى",q:"تحرير العقول من الخرافة وكشف الزيف من مهام:",o:["الثقافة الإسلامية","الفقه الإسلامي","العادات الاجتماعية","جميع ما سبق"],a:0,s:"المحاضرة 1 صفحة 15"},
+  {l:"المحاضرة الأولى",q:"حرصت ........... على بناء الشخصية من جميع الجوانب النفسية والروحية والعقلية والجسدية بما يتناسب مع طبيعتها:",o:["الثقافة الشرقية","الثقافة الإسلامية","الثقافة السائدة","الثقافة المنتشرة"],a:1,s:"المحاضرة 1 صفحة 16"},
+  {l:"المحاضرة الأولى",q:"تحرص الثقافة الإسلامية على بث روح التميز:",o:["العام للأمة الإسلامية عن غيرها","الفردي للشخصية المسلمة","الاجتماعي لكل مسلم","الأسري في المجتمع"],a:0,s:"المحاضرة 1 صفحة 17"},
+  {l:"المحاضرة الأولى",q:"ترجمة الأخلاق والتعاليم الإسلامية إلى واقع عملي وسلوكي ملموس، يعايشه المسلم في حياته العملية اليومية؛ تعد من:",o:["علاقة الثقافة بالدين","مظاهر أهمية دراسة الثقافة الإسلامية","علاقة الثقافة بالعلم","تعريفات الثقافة الإسلامية"],a:1,s:"المحاضرة 1 صفحة 18"},
+
+  // ===== Lecture 2 =====
+  {l:"المحاضرة الثانية",q:"الطاعة، والعبادة، والإخلاص لله سبحانه؛ من:",o:["معاني الدين في القرآن الكريم","دلالات الثقافة لغة","دلالات العلم لغة","مصطلحات العلم"],a:0,s:"المحاضرة 2 صفحة 5"},
+  {l:"المحاضرة الثانية",q:"يضع الدين إجابات مطلقة مع اختلاف دلالتها أحياناً، بعكس الثقافة فهي قابلة للنقاش والرد:",o:["لا اتفق أبداً","الديانات السماوية","اتفق تماماً","اتفق لحد ما"],a:2,s:"المحاضرة 2 صفحة 6"},
+  {l:"المحاضرة الثانية",q:"تتسم علاقة الثقافة بالدين بالطردية متى وجدت الثقافة أنتفى الدين:",o:["اتفق لحد ما","اتفق تماماً","الديانات الهندية","لا اتفق أبداً"],a:3,s:"المحاضرة 2 صفحة 6"},
+  {l:"المحاضرة الثانية",q:"جملة مظاهر الرقي العلمي والفني والأدبي والاجتماعي التي تنتقل من جيل إلى جيل في مجتمع أو مجتمعات متشابهة؛ هذا تعريف:",o:["الثقافة لغة","الثقافة اصطلاحاً","العلوم اصطلاحاً","الحضارة اصطلاحاً"],a:3,s:"المحاضرة 2 صفحة 8"},
+  {l:"المحاضرة الثانية",q:"من خصائص الثقافة الإسلامية:",o:["المعرفة","العلم","الإنسانية","لا تنصف الخصم"],a:2,s:"المحاضرة 2 صفحة 15"},
+  {l:"المحاضرة الثانية",q:"الثقافة الإسلامية مصدرها الأساسي القرآن الكريم والسنة المطهرة، وهذا يدل على:",o:["الواقعية","أنها ثقافة بناء لا هدم","انضباطها بالوحي","الإنسانية"],a:2,s:"المحاضرة 2 صفحة 16"},
+  {l:"المحاضرة الثانية",q:"انصاف الخصم يكون بـ:",o:["الخلاف في الرأي لا يفسد للود قضية","إمكانية تعدد الصواب","احتمال صواب المخالف","كل ما سبق"],a:3,s:"المحاضرة 2 صفحة 18"},
+  {l:"المحاضرة الثانية",q:"قوله تعالى: {إِنَّا أَنزَلْنَا إِلَيْكَ الْكِتَابَ بِالْحَقِّ لِتَحْكُمَ بَيْنَ النَّاسِ بِمَا أَرَاكَ اللَّهُ وَلَا تَكُنْ لِلْخَائِنِينَ خَصِيمًا}:",o:["نزلت في الانتصار للمهاجرين","نزلت في الانتصار ليهودي","نزلت في الانتصار للأنصار","نزلت في الانتصار للخزرج"],a:1,s:"المحاضرة 2 صفحة 23"},
+  {l:"المحاضرة الثانية",q:"الاستخلاف في الأرض وخلق الإنسان في أحسن تقويم من مظاهر:",o:["حيوانية الإنسان وتطوره الاجتماعي والإنتاجي","إلهية الإنسان ورقي سلوكه","تكريم الخالق له","الاستجداء من النظريات المادية"],a:2,s:"المحاضرة 2 صفحة 29"},
+  {l:"المحاضرة الثانية",q:"تتميز الثقافة الإسلامية بأنها ثقافة واقعية لأنها:",o:["تتعامل مع الحقائق الموضوعية التي لها وجود حقيقي متيقن، وأثر واقعي إيجابي","تتعامل مع تصورات عقلية مجردة","تتعامل مع مثاليات لا وجود لها في عالم الواقع","تفترض تصورات ذهنية يصعب تطبيقها"],a:0,s:"المحاضرة 2 صفحة 33"},
+  {l:"المحاضرة الثانية",q:"\"تتعامل مع الحقائق الموضوعية، ذات الوجود الحقيقي المتيقن\":",o:["أهمية الثقافة الإسلامية","أهمية الثقافة الإنسانية","واقعية الثقافة الإنسانية","واقعية الثقافة الإسلامية"],a:3,s:"المحاضرة 2 صفحة 33"},
+  {l:"المحاضرة الثانية",q:"التواصل مع الثقافات الأخرى في الثقافة الإسلامية:",o:["نظرية خيالية","بإيجابية ومرونة","التجريدية النظرية","التصورات الفكرية"],a:1,s:"المحاضرة 2 صفحة 35"},
+  {l:"المحاضرة الثانية",q:"التواصل مع الثقافات الأخرى في الثقافة الإسلامية هو شيء:",o:["خيالي","إيجابي ومرن","سلبي","ليس مما سبق"],a:1,s:"المحاضرة 2 صفحة 35"},
+  {l:"المحاضرة الثانية",q:"من ........... الثقافة الإسلامية أنها تواصلها مع الثقافات الأخرى، حيث إن الإنسان هو الإنسان في كل زمان ومكان:",o:["واقعية","تناقض","غرابة","كل ما سبق"],a:0,s:"المحاضرة 2 صفحة 35"},
+
+  // ===== Lecture 3 =====
+  {l:"المحاضرة الثالثة",q:"من المصادر الشرعية للثقافة الإسلامية:",o:["التاريخ الإسلامي","الفقه الإسلامي","الفكر البشري","اللغة العربية وآدابها"],a:1,s:"المحاضرة 3 صفحة 3"},
+  {l:"المحاضرة الثالثة",q:"المصدر الثالث من المصادر الشرعية للثقافة الإسلامية:",o:["القرآن الكريم","الفقه الإسلامي","السنة النبوية","لا شيء مما سبق"],a:1,s:"المحاضرة 3 صفحة 3"},
+  {l:"المحاضرة الثالثة",q:"أول مصدر من مصادر الثقافة الإسلامية:",o:["الفقه الإسلامي","السنة النبوية","القرآن الكريم","الإجماع"],a:2,s:"المحاضرة 3 صفحة 6"},
+  {l:"المحاضرة الثالثة",q:"قوله تعالى: (لَقَدْ كَانَ لَكُمْ فِي رَسُولِ اللَّهِ أُسْوَةٌ حَسَنَةٌ)، يدل على أن:",o:["السنة مستمدة من الوحي الإلهي","السنة تجسيد للمنهج الرباني في صورة عملية","السنة تفسير للقرآن الكريم وشرح لمعانيه","الإجابتان (أ، ج) صحيحتان"],a:1,s:"المحاضرة 3 صفحة 12"},
+  {l:"المحاضرة الثالثة",q:"الإجماع والقياس يعدان مصدران:",o:["للثقافة الكونية","للعولمة الثقافية","للثقافة الإسلامية","للعولمة الدولية"],a:2,s:"المحاضرة 3 صفحة 14"},
+  {l:"المحاضرة الثالثة",q:"يجسد ........ للأمة مسيرتها وبيان مدى ارتباطها بمنهجها:",o:["السنة النبوية","اللغة العربية","العزم الشديد","التاريخ الإسلامي"],a:3,s:"المحاضرة 3 صفحة 17"},
+  {l:"المحاضرة الثالثة",q:"يعلم بـ ............. مدى تفاعل الأمة الإسلامية مع الأمم الأخرى:",o:["القرآن الكريم","التاريخ الإسلامي","الفقه الإسلامي","جميع ما سبق"],a:1,s:"المحاضرة 3 صفحة 19"},
+  {l:"المحاضرة الثالثة",q:"يعد مجالاً خصباً لمعرفة الدروس والعبر والإفادة منها في الحاضر والمستقبل؛ هو:",o:["الواقع المعاصر","الفقه الإسلامي","الفكر البشري","التاريخ الإسلامي"],a:3,s:"المحاضرة 3 صفحة 20"},
+
+  // ===== Lecture 4 =====
+  {l:"المحاضرة الرابعة",q:"يطلق على الفعل الذي تقوم به النفس عند حركتها في المعقولات أو يطلق على المعقولات نفسها؛ فإذا أطلق على فعل النفس دل على حركتها الذاتية وهي النظر والتأمل، وإذا أطلق على المعقولات دل على المفهوم الذي تفكر فيه النفس؛ هذا تعريف:",o:["العلم اصطلاحاً","العقل اصطلاحاً","الفكر اصطلاحاً في المعجم الفلسفي","التغريب اصطلاحاً"],a:2,s:"المحاضرة 4 صفحة 5"},
+  {l:"المحاضرة الرابعة",q:"توزيع المواهب والقدرات بين أبناء البشر هو:",o:["عدالة ربانية","عدالة اجتماعية","عدالة قانونية","عدالة ثقافية"],a:0,s:"المحاضرة 4 صفحة 12"},
+  {l:"المحاضرة الرابعة",q:"ارتباط الفكر بالحساب والجزاء سببه:",o:["الاختيار","الإكراه","الخلق","لا شيء مما سبق"],a:0,s:"المحاضرة 4 صفحة 14"},
+  {l:"المحاضرة الرابعة",q:"من أكبر أسباب ضعف التطوير في مختلف جوانب الحياة هو:",o:["جمود الأموال","جمود الإنتاج","جمود الحركة","جمود التفكير"],a:3,s:"المحاضرة 4 صفحة 15"},
+  {l:"المحاضرة الرابعة",q:"ما تعيشه البشرية من تقدم مادي ورقي إنساني هو من نتائج:",o:["تطوير التفكير","تطوير الأسلحة","تطوير الصحة","كل ما سبق"],a:0,s:"المحاضرة 4 صفحة 15"},
+  {l:"المحاضرة الرابعة",q:"واحدة مما تلي هي من عوامل تكوين الفكر:",o:["الدين","المعاصرة","أصالة الفكرة","المسؤولية الأخلاقية"],a:0,s:"المحاضرة 4 صفحة 17"},
+  {l:"المحاضرة الرابعة",q:"الانفتاح المعرفي؛ يعد من:",o:["الأسس المنهجية التي توصل للفكر السليم","التأمل والروية","تعريفات الفكر لغة","خصائص الفكر"],a:0,s:"المحاضرة 4 صفحة 23"},
+  {l:"المحاضرة الرابعة",q:"مراجعة الأفكار وتنقيحها، هذا يعد من:",o:["عوامل تكوين الفكر","خصائص الفكر","الأسس المنهجية التي توصل للفكر السليم","دلالات الفكر"],a:2,s:"المحاضرة 4 صفحة 23"},
+
+  // ===== Lecture 5 =====
+  {l:"المحاضرة الخامسة",q:"إحدى الإجابات التالية من أبرز عناصر الثقافة الإسلامية:",o:["القيم","المعاصرة","الفكر","البناء المعرفي"],a:0,s:"المحاضرة 5 صفحة 3"},
+  {l:"المحاضرة الخامسة",q:"من القائل: من شهد سلسلة الأسباب، وكيف تتصل حلقاتها لا يجد بدا من التسليم بالله:",o:["كارل ماركس","هيجل","إسحاق نيوتن","فرانسيس بيكون"],a:3,s:"المحاضرة 5 صفحة 10"},
+  {l:"المحاضرة الخامسة",q:"عرفت ........... على أنها \"اسم جامع لكل ما يحبه الله تعالى ويرضاه من الأقوال والأفعال الظاهرة والباطنة\":",o:["الدين","العبادة","الزكاة","جميع ما سبق صحيح"],a:1,s:"المحاضرة 5 صفحة 17"},
+  {l:"المحاضرة الخامسة",q:"معايير تحكم حركة الإنسان الفكرية؛ هي:",o:["قيم الخير","قيم فكرية","قيم الجمال","قيم الذوق"],a:1,s:"المحاضرة 5 صفحة 18"},
+  {l:"المحاضرة الخامسة",q:"أقرب المعاني المقصودة للقيم في اللغة:",o:["قيمة الشئ وثمنه","الاستقامة والاعتدال","الثبات والدوام والاستمرار على الشيء","نظام الأمر وعماده"],a:2,s:"المحاضرة 5 صفحة 19"},
+  {l:"المحاضرة الخامسة",q:"مفهوم ........... في اللغة هو \"الثبات والدوام والاستمرار على الشيء\":",o:["الفكر","الدين","المذهب","القيم"],a:3,s:"المحاضرة 5 صفحة 19"},
+  {l:"المحاضرة الخامسة",q:"عرفت ........... على أنها \"حكم يصدره الإنسان على شيء ما، مهتدياً بمجموعة المبادئ والمعايير التي ارتضاها الشرع، محدداً المرغوب فيه، والمرغوب عنه من السلوك\":",o:["الفكر","الدين","المذهب","القيم"],a:3,s:"المحاضرة 5 صفحة 20"},
+  {l:"المحاضرة الخامسة",q:"تترتب أهمية القيم في أنواعها الثلاث:",o:["القيم العليا (الحق والعبودية والعدل)","القيم الحضارية (الاستخلاف والحرية والمسؤولية)","القيم الخلقية (الصدق والبر والأمانة)","جميع ما سبق"],a:3,s:"المحاضرة 5 صفحة 21"},
+  {l:"المحاضرة الخامسة",q:"من خصائص القيم الإسلامية:",o:["الربانية","الشمول","الملائمة للفطرة","كل ما سبق صحيح"],a:3,s:"المحاضرة 5 صفحة 24"},
+  {l:"المحاضرة الخامسة",q:"ارتباط القيم بالعدل والقدسية والجزاء في الدنيا والآخرة سببه:",o:["ربانية القيم","إنسانية القيم","الوحدة العربية","الأمم السابقة"],a:0,s:"المحاضرة 5 صفحة 24"},
+
+  // ===== Lecture 7 =====
+  {l:"المحاضرة السابعة",q:"سمة وميزة لهذه الأمة، وبها تعرف دون الأمم، ذكرت في قوله تعالى: (وَكَذَٰلِكَ جَعَلْنَاكُمْ أُمَّةً وَسَطًا لِتَكُونُوا شُهَدَاءَ عَلَى النَّاسِ وَيَكُونَ الرَّسُولُ عَلَيْكُمْ شَهِيدًا):",o:["الشجاعة","المروءة","الوسطية","الإنسانية"],a:2,s:"المحاضرة 7 صفحة 4"},
+  {l:"المحاضرة السابعة",q:"ربط الفتوى بمعتبرات المصالح والنصوص:",o:["وسطية","تمذهب","تقليد","جميع ما سبق"],a:0,s:"المحاضرة 7 صفحة 13"},
+  {l:"المحاضرة السابعة",q:"الإسلام يجعل الحوار أساساً للتعامل مع الآخر، ويعطيه الحرية في ممارسة شعائره، ولا يكون الخلاف دافعا للعداء أو الاعتداء، بل العيش المشترك هو الجامع للتعاون، وأن المواطنة تقرب بين المختلفين، وتجعلهم يسعون للاشتراك في تحقيق المصالح المرجوة للجميع، وهذي وسطيته في مجال:",o:["التعامل مع الآخر","التمذهب والتقليد","الفتوى","الأخلاق"],a:0,s:"المحاضرة 7 صفحة 15"},
+  {l:"المحاضرة السابعة",q:"من جهود الملك عبد العزيز رحمه الله في الوسطية:",o:["لزوم اتباع المنهج الوسطي في كافة مجالات الدنيا والدين","منع شعائر الضلال، وما خالف سنة النبي صلى الله عليه وسلم","استدعاء علماء العالم الإسلامي بمواسم الحج والعمرة وحثهم على بيان الحق","جميع ما سبق"],a:3,s:"المحاضرة 7 صفحة 16"},
+  {l:"المحاضرة السابعة",q:"من جهود الدعوة الإسلامية في المملكة العربية السعودية:",o:["نشر منهج الإسلام الوسطي، وتوثيق صلة الناس بالعلماء","حسن صلة الناس بولاة الأمر، وتحذيرهم من دعاة الغلو","نقض شبهات الغلاة، وكشف باطلهم","جميع ما سبق"],a:3,s:"المحاضرة 7 صفحة 20"},
+  {l:"المحاضرة السابعة",q:"من المحاور المهمة التي ركزت عليها المكاتب التعاونية للدعوة والإرشاد وتوعية الجاليات بالمملكة العربية السعودية لمعالجة الغلو:",o:["نشر منهج الإسلام الوسطي المعتدل بجميع اللغات","توثيق صلة الناس بعلمائهم، وولاة أمورهم","التحذير من دعاة الغلو، ومناهجهم، ونقض شبهات الغلاة، وكشف باطلهم","جميع ما سبق"],a:3,s:"المحاضرة 7 صفحة 20"},
+  {l:"المحاضرة السابعة",q:"\"من المملكة العربية السعودية انطلق الإسلام وأضيئت أنوار النبوة، وسيظل هذا الوطن الغالي متمسكا بثوابت الدين الحنيف، دين الوسطية والاعتدال، ومحاربا بلا هوادة للتطرف والإرهاب\":",o:["الأمير محمد بن سلمان حفظه الله","الأمين العام للأمم المتحدة","الملك فاروق","الشيخ محمد بن إبراهيم رحمه الله"],a:0,s:"المحاضرة 7 صفحة 23"},
+
+  // ===== Lecture 8 =====
+  {l:"المحاضرة الثامنة",q:"أن ............ غير محدودة بعصر ولا بجيل ولا بمكان؛ فهي تخاطب كل الأمم وكل الأجناس وكل الشعوب وكل الطبقات وهي هداية ربّ النّاس لكل الناس ورحمة الله لكل عباد الله:",o:["الثقافة الإسلامية","العولمة الثقافية","الوسطية","رسالة الإسلام"],a:3,s:"المحاضرة 8 صفحة 4"},
+  {l:"المحاضرة الثامنة",q:"عالمية الإسلام مقررة:",o:["لفظياً","معنوياً","لفظياً ومعنوياً","لا شيء مما سبق"],a:2,s:"المحاضرة 8 صفحة 4"},
+  {l:"المحاضرة الثامنة",q:"القرآن الكريم وصف الرسالة الإسلامية بأنها رسالة عالمية؛ وذلك في قوله تعالى:",o:["(وما أرسلناك إلا رحمة للعالمين)","(وَمَا أَرْسَلْنَاكَ إِلَّا كَافَّةً لِلنَّاسِ بَشِيرًا وَنَذِيرًا)","(تَبَارَكَ الَّذِي نَزَّلَ الْفُرْقَانَ عَلَى عَبْدِهِ لِيَكُونَ لِلْعَالَمِينَ نَذِيرًا)","كل ما سبق"],a:3,s:"المحاضرة 8 صفحة 5"},
+  {l:"المحاضرة الثامنة",q:"التشريع الإسلامي جاء شاملاً كاملاً لكل الأمم، وكل الأزمنة والأمكنة، وهذا يدل على:",o:["واقعية الشريعة","عالمية الإسلام","التغريب","لا شيء مما سبق"],a:1,s:"المحاضرة 8 صفحة 6"},
+  {l:"المحاضرة الثامنة",q:"دعوة غير العرب للإسلام في الخطاب القرآني والسنة النبوية يشير إلى:",o:["الثقافة الإسلامية","العولمة الثقافية","عالمية الإسلام","جميع ما سبق"],a:2,s:"المحاضرة 8 صفحة 10"},
+  {l:"المحاضرة الثامنة",q:"الدليل على أن الإسلام ينبذ أي مقومات للتفرقة بين الناس؛ قوله تعالى:",o:["(وتعاونوا على البر والتقوى ولا تعاونوا على الإثم والعدوان وَاتَّقُوا اللَّهَ)","(يا أَيُّهَا النَّاسُ إِنَّا خلقناكم من ذكر وأنثى وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا إِنْ أَكْرَمَكُمْ عِنْدَ اللَّهِ أَتْقَاكُمْ)","(إن في خلق السَّمَاوَاتِ وَالْأَرْضُ وَاخْتِلَافِ اللَّيْلِ وَالنَّهَارِ لَا يَاتٍ لِأُولِي الْأَلْبَابِ)","(وأولو الأرحام بَعْضُهُمْ أَوْلَى بِبَعْضٍ فِي كِتَابِ اللَّهِ)"],a:1,s:"المحاضرة 8 صفحة 13"},
+  {l:"المحاضرة الثامنة",q:"واحدة مما تلي من مرتكزات عالمية الإسلام ودعائمها:",o:["عالمية القيم","القرابة","العهود والمواثيق","الأسرة"],a:0,s:"المحاضرة 8 صفحة 21"},
+  {l:"المحاضرة الثامنة",q:"قوله تعالى: (وأولو الأرحامِ بَعْضُهُمْ أولى ببعض في كتاب الله) يدل على رابطة:",o:["الأوطان والمواثيق","وحدة الأصل","الأسرة والقرابة","كل ما سبق غير صحيح"],a:2,s:"المحاضرة 8 صفحة 25"},
+
+  // ===== Lecture 9 =====
+  {l:"المحاضرة التاسعة",q:"أنها لغة فطرية يتواصل أصحابها بالاكتساب والتعلم فهي لغة كتابه جل جلاله الذي حفظه في اللوح المحفوظ إلى يوم الدين:",o:["اللغة العربية","الدعوة للعامية","أصول التشريع","الأمة العربية"],a:0,s:"المحاضرة 9 صفحة 4"},
+  {l:"المحاضرة التاسعة",q:"ارتباط اللغة العربية بالدين الإسلامي اتصف بكونه ارتباطاً:",o:["وظيفياً لانتشارها أكثر من غيرها","عضوياً بكافة مصادره ومؤلفاته","مجازياً لا حقيقياً","جميع ما سبق"],a:1,s:"المحاضرة 9 صفحة 6"},
+  {l:"المحاضرة التاسعة",q:"مؤسس الدراسة اللغوية في العربية هو:",o:["قيس بن ساعدة","النابغة الذبياني","الجاحظ","أبو الأسود الدولي"],a:3,s:"المحاضرة 9 صفحة 8"},
+  {l:"المحاضرة التاسعة",q:"أكمل ما يأتي: كره ........... لمن يعرف العربية أن يتكلم بغيرها، أو يتكلم بها خالطاً لها بالعجمية:",o:["الشافعي رحمه الله","ابن الجوزي رحمه الله","ابن تيمية رحمه الله","كارل بروكلمان"],a:0,s:"المحاضرة 9 صفحة 9"},
+  {l:"المحاضرة التاسعة",q:"تتمتع ........... بقدرة فائقة على استيعاب كل جديد من العلم والحكمة والفلسفة وأنواع المعرفة الأخرى، وهي تتمتع كذلك برسوخ في الأصول وحيوية في الفروع:",o:["القومية","اللغة الصينية","اللغة العربية","عالمية الإسلام"],a:2,s:"المحاضرة 9 صفحة 11"},
+  {l:"المحاضرة التاسعة",q:"من خصائصها أنها صنعت قانونها بنفسها: فإذا تكلم ذو بيان فإنك تطرب لسماعها، وتفهم بيانها، وترتاح لتبيانها:",o:["اللغة الانجليزية","اللغة الإيطالية","اللغة الفرنسية","اللغة العربية"],a:3,s:"المحاضرة 9 صفحة 13"},
+  {l:"المحاضرة التاسعة",q:"صنعت ............ قانونها بنفسها: فإذا تكلم ذو بيان فإنك تطرب لسماعها، وتفهم بيانها، وترتاح لتبيانها:",o:["الأنظمة الوضعية","اللغة الصينية","اللغة العبرية","اللغة العربية"],a:3,s:"المحاضرة 9 صفحة 13"},
+  {l:"المحاضرة التاسعة",q:"واحدة مما تلي هي من وظائف اللغة العربية؛ أنها:",o:["مقوم من مقومات الأمة العربية الواحدة","تعمل على تأصيل العقيدة الإسلامية","الإجابتان (أ، ب) صحيحتان","لا شيء مما سبق"],a:2,s:"المحاضرة 9 صفحة 16"},
+  {l:"المحاضرة التاسعة",q:"أنها تحمل مبادئ الإسلام السليمة بحكم أنها لغة القرآن الكريم؛ هذا من:",o:["مميزات اللغة العربية","وظائف اللغة العربية","أهمية اللغة العربية","كل ما سبق ليس صحيحاً"],a:1,s:"المحاضرة 9 صفحة 16"},
+
+  // ===== Lecture 10 =====
+  {l:"المحاضرة العاشرة",q:"الرجوع عن الشيء إلى الشيء؛ ويقصد به: المراجعة في الكلام:",o:["الحوار","الحجة","الدليل","المعادن"],a:0,s:"المحاضرة 10 صفحة 4"},
+  {l:"المحاضرة العاشرة",q:"يطلق الجدال والحوار:",o:["ولا فرق بينهما","الجدال قد يكون مذموماً وبعكسه الحوار","الحوار قد يكون مذموماً وبعكسه الجدال","لا رابط بينهما"],a:1,s:"المحاضرة 10 صفحة 4"},
+  {l:"المحاضرة العاشرة",q:"أطلق على من خاصم بما يشغل عن ظهور الحق ووضوح الصواب، ثم استعمل في مقابلة الأدلة لظهور أقواها وأرجحها:",o:["الحوار","النقاش","الحجة","الجدال"],a:3,s:"المحاضرة 10 صفحة 4"},
+  {l:"المحاضرة العاشرة",q:"يكتسب أهمية بالغة في منظومة الدعوة الإسلامية؛ حيث إنه أسلوب أصيل من أساليب الدعوة ومعلم بارز في منهجها الرشيد:",o:["الجدال","الحوار","السفسطة","إظهار الغلبة"],a:1,s:"المحاضرة 10 صفحة 5"},
+  {l:"المحاضرة العاشرة",q:"هل الحوار منبثق من نفس الإنسان فهو قديم بقدم خلقه، كحوار آدم عليه السلام وحواء:",o:["مؤكد","لا أبدا","لا اعتقد","غير مؤكد"],a:0,s:"المحاضرة 10 صفحة 5"},
+  {l:"المحاضرة العاشرة",q:"المشتركات المتفق عليها بين المتحاورين، والتنسيق في العمل عليها هو:",o:["الجدال","الحجة","الحوار","لا شيء مما سبق"],a:2,s:"المحاضرة 10 صفحة 5"},
+  {l:"المحاضرة العاشرة",q:"معرفة أطروحات الطرف الآخر ووجهات نظره وحججه في القضايا المتناقش فيها، وتعريف الطرف الآخر بما يغيب عنه أو يلتبس عليه من المعلومات ووجهات النظر والبراهين في القضايا، يكون بـ:",o:["الحوار","الإجبار","التهديد","التقنية"],a:0,s:"المحاضرة 10 صفحة 7"},
+  {l:"المحاضرة العاشرة",q:"من الأصول التي تضبط مسار الحوار:",o:["إرادة الوصول إلى الحق","عدم تحديد الهدف والقضية","مناقشة الفراغ قبل الاتفاق على الأصل","لا يوجد أصل يرجع إليه"],a:0,s:"المحاضرة 10 صفحة 9"},
+  {l:"المحاضرة العاشرة",q:"الحوار الراقي يكون بـ:",o:["الاحترام المتبادل","الإنصاف والعدل","نبذ التعصب والكراهية","كل ما سبق"],a:3,s:"المحاضرة 10 صفحة 13"},
+  {l:"المحاضرة العاشرة",q:"............. هو التشاور والتفاعل الثقافي بين الشعوب، والقدرة على التكيف مع الأفكار المخالفة والتعامل مع جميع الآراء الثقافية والدينية والسياسية:",o:["حوار الحضارات","حوار الأفراد","حوار الأزواج","كل ما سبق"],a:0,s:"المحاضرة 10 صفحة 15"},
+  {l:"المحاضرة العاشرة",q:"الاعتراف بالآخر؛ يعد من:",o:["شروط الحوار الحضاري","مجالات الحوار الحضاري","مميزات الحوار الحضاري","كل ما سبق غير صحيح"],a:0,s:"المحاضرة 10 صفحة 16"},
+  {l:"المحاضرة العاشرة",q:"............. يقتضي قبولاً مبدئياً على الأقل بوجود الآخر، وبحقه في هذا الوجود، وبخصوصيته التي لا يجوز لأحد أن يسعى إلى تغيرها:",o:["الاعتراف بالآخر","الهيمنة","الغرب","كل ما سبق"],a:0,s:"المحاضرة 10 صفحة 16"},
+  {l:"المحاضرة العاشرة",q:"من جهود المملكة العربية السعودية في حوار الحضارات على الصعيد الدولي هو تأسيس:",o:["مركز الملك عبد الله بن عبدالعزيز رحمه الله بين أتباع الأديان والثقافات (كايسيد)","مركز التنمية الاجتماعي","مركز سلام","جميع ما سبق"],a:0,s:"المحاضرة 10 صفحة 19"},
+
+  // ===== Lecture 11 =====
+  {l:"المحاضرة الحادية عشر",q:"أن يعيش الناس في بلدانهم وأوطانهم وبين مجتمعاتهم، أمنين مطمئنين على مكونات أصالتهم، وثقافتهم النوعية ومنظومتهم الفكرية:",o:["الوسطية العقدية","الثقافة الكونية","العولمة الثقافية","الأمن الفكري"],a:3,s:"المحاضرة 11 صفحة 5"},
+  {l:"المحاضرة الحادية عشر",q:"وإن المجتمع المسلم يرتبط ............. وهي التي تعطيه الحصانة من الوقوع في أي شتات فكري مستورد أو شذوذ التفكير الخاطئ:",o:["بأصوله الشرعية","بتقاليده الثقافية","بعلاقاته الأممية","بكافة أفراده"],a:0,s:"المحاضرة 11 صفحة 5"},
+  {l:"المحاضرة الحادية عشر",q:"تلك الحالة الفكرية السليمة من كل الدواخل المنحرفة التي تضير بالآخرين:",o:["مفهوم الأمن الفكري باللفظ المركب","الثقافة","الحضارة","التغريب"],a:0,s:"المحاضرة 11 صفحة 5"},
+  {l:"المحاضرة الحادية عشر",q:"إن تحقق الأمن الفكري في الوطن يفتح المجال الحقيقي:",o:["للارتخاء الإنتاجي","للهجرة العشوائية","للإبداع والنمو والتطور","جميع ما سبق"],a:2,s:"المحاضرة 11 صفحة 7"},
+  {l:"المحاضرة الحادية عشر",q:"تتمثل أهمية ............ في تعليم الشباب الوعي الشامل وأساليب اكتساب العلم، وشرائط التعبير عن الرأي:",o:["الأمن الفكري","التغريب","التنصير","الطب"],a:0,s:"المحاضرة 11 صفحة 7"},
+  {l:"المحاضرة الحادية عشر",q:"يحافظ الأمن الفكري لهذه الأمة على:",o:["هويتها","ثقافتها","مكوناتها الأصيلة","جميع ذلك"],a:3,s:"المحاضرة 11 صفحة 8"},
+  {l:"المحاضرة الحادية عشر",q:"من طرق تحقق الأمن الفكري:",o:["الحضارة","وسائل التواصل الاجتماعي","الثقافة","حفظ مصادر الفكر البشري"],a:3,s:"المحاضرة 11 صفحة 9"},
+  {l:"المحاضرة الحادية عشر",q:"تعد الأسرة من:",o:["المصادر التي يعتمد عليها العقل البشري","أهمية الأمن الفكري","ضوابط الأمن الفكري","كل ما سبق غير صحيح"],a:0,s:"المحاضرة 11 صفحة 9"},
+  {l:"المحاضرة الحادية عشر",q:"حين يقيق منها ............ يكون شغله الشاغل بعد ذلك تأمين الحصول عليها مراراً مما يجعله يتوجه للانحرافات الفكرية والسلوكية التي تخل بالأمن الفكري للمجتمع:",o:["النائم","الغافل","المتعاطي","جميع ما سبق"],a:2,s:"المحاضرة 11 صفحة 15"},
+  {l:"المحاضرة الحادية عشر",q:"حفظ مخرجات العقل؛ يعد من:",o:["الجدال","طرق تحقق الأمن الفكري","الحضارة","المدنية"],a:1,s:"المحاضرة 11 صفحة 16"},
+  {l:"المحاضرة الحادية عشر",q:"التميز والابتكار والاختراع والأفكار الجديدة التي تسهل على المجتمع حياته، والتي تصنف بنظام الحماية للحقوق الملكية الفردية؛ هي من:",o:["المخرجات الغير ضرورية","المخرجات المنحرفة","المخرجات الناجحة","المخرجات السيئة"],a:2,s:"المحاضرة 11 صفحة 16"},
+  {l:"المحاضرة الحادية عشر",q:"كل مخرجات عقلية تحاول تقويض أركان المجتمع كالأسرة والتعليم والثقافة، أو خلق نظام التطرف الديني الذي يتولد منه الإرهاب، هو:",o:["المخرجات الناجحة","المخرجات المنحرفة","المخرجات العامة","المخرجات المستوردة"],a:1,s:"المحاضرة 11 صفحة 16"},
+
+  // ===== Lecture 12 =====
+  {l:"المحاضرة الثانية عشر",q:"إن العلاقة بين الإيمان والأمن ليس فقط مشترك لفظي بمشاركة حروفه الأصلية (أ م ن) والتي ذكرت مشتقات هذه المادة أكثر من (.....) مرة في كتاب الله تعالى:",o:["١٥٠٠","٧٠٠٠","٢٣٠","٨٠٠"],a:3,s:"المحاضرة 12 صفحة 4"},
+  {l:"المحاضرة الثانية عشر",q:"قال الله تعالى: (وعد الله الذين ءامنوا منكم وعملوا الصالحات ليستخلفنهم في الأرض كما استخلف الذين من قبلهم وليمكنن لهم دينهم الذي ارتضى لهم وليبدلنهم من بعد خوفهم أمنا يعبدونني لا يشركون بي شيئا ومن كفر بعد ذلك فأولئك هم الفاسقون)، ما المراد بالأمن في هذه الآية:",o:["الأمن الفكري","الأمن الشامل","الأمن الاقتصادي","الأمن القومي"],a:1,s:"المحاضرة 12 صفحة 5"},
+  {l:"المحاضرة الثانية عشر",q:"يقول العلامة الشاطبي رحمه الله: \"الأمور التي تتوقف عليها حياة الناس في الدنيا، وبدونها لا تستقيم الحياة، وتنحصر في خمسة أمور هي: الدين، و .......، والعقل، والنسل، والمال\":",o:["النفس","الهوى","الخجل","الذهب"],a:0,s:"المحاضرة 12 صفحة 6"},
+  {l:"المحاضرة الثانية عشر",q:"يحقق العلم الإيماني الذي يدعو إليه القرآن الكريم فضيلة الجمع بين التقوى و........:",o:["الأدب","الشعر","العلم","الصلاة"],a:2,s:"المحاضرة 12 صفحة 7"},
+  {l:"المحاضرة الثانية عشر",q:"من دور الشريعة الإسلامية في الاهتمام بالأمن الفكري:",o:["العمل الصالح","تحقيق الوسطية والاعتدال","الإجابتان (أ، ب) صحيحتان","كل الإجابات السابقة غير صحيحة"],a:2,s:"المحاضرة 12 صفحة 9"},
+  {l:"المحاضرة الثانية عشر",q:"إن التزام جانب ............. والابتعاد عن الإفراط والتفريط في الدين من أهم الضمانات اللازمة لاستمرار نعمة الأمن في بلادنا:",o:["الوسطية والاعتدال","اليهودية","الإلحاد","الجيش"],a:0,s:"المحاضرة 12 صفحة 12"},
+
+  // ===== Lecture 13 =====
+  {l:"المحاضرة الثالثة عشر",q:"تعريف ........... هو اتجاه الحركة الحضارية نحو سيادة نظام واحد، تقوده في الغالب قوة واحدة:",o:["العولمة","التطور","الانحياز","القدرة"],a:0,s:"المحاضرة 13 صفحة 5"},
+  {l:"المحاضرة الثالثة عشر",q:"العولمة: اتجاه الحركة الحضارية نحو سيادة .............. تقوده في الغالب قوة واحدة:",o:["العدل والنزاهة","الأمم المتحدة","نظام واحد","لا شيء مما سبق"],a:2,s:"المحاضرة 13 صفحة 5"},
+  {l:"المحاضرة الثالثة عشر",q:"استقطاب النشاط السياسي والاقتصادي في العالم حول إرادة مركز واحد من مراكز القوة في العالم، هذا تعريف:",o:["الاستشراق","التغريب","العولمة","الثقافة"],a:2,s:"المحاضرة 13 صفحة 5"},
+  {l:"المحاضرة الثالثة عشر",q:"تحرير التجارة الدولية وقيام الشركات الكبرى العالمية متعددة الجنسيات:",o:["دوافع التنصير","دوافع الوسطية","دوافع التغريب","دوافع العولمة"],a:3,s:"المحاضرة 13 صفحة 6"},
+  {l:"المحاضرة الثالثة عشر",q:"بعد سقوط الاتحاد السوفيتي عام ١٩٩١م برزة ظاهرة:",o:["العولمة","التطور","الانحياز","القدرة"],a:0,s:"المحاضرة 13 صفحة 6"},
+  {l:"المحاضرة الثالثة عشر",q:"نشأ النظام الجديد (العولمة):",o:["بعد الحرب العالمية الثانية","بعد انتهاء الحروب الصليبية","بعد انتهاء الحرب الباردة بين القطبين أمريكا والاتحاد السوفييتي","عام ١٥٥٠م"],a:2,s:"المحاضرة 13 صفحة 6"},
+  {l:"المحاضرة الثالثة عشر",q:"تغييب المبادئ الدينية والخلقية تحت وطأة تأثير الفكر الغربي والنظريات المنحرفة عن الدين والقيم:",o:["من بواعث التنصير","من أخطار العولمة الثقافية","من آثار التغريب","لا شيء مما سبق"],a:1,s:"المحاضرة 13 صفحة 10"},
+
+  // ===== Lecture 14 =====
+  {l:"المحاضرة الرابعة عشر",q:"التنصير هو الجهد المبذول بصفة فردية أو جماعية في دعوة الناس إلى:",o:["اليهودية","الإسلام","البوذية","النصرانية"],a:3,s:"المحاضرة 14 صفحة 4"},
+  {l:"المحاضرة الرابعة عشر",q:"التنصير لم يعرف بالتأثير والنشاط المدعومين إلا بعد:",o:["فشل الحروب الصليبية","الغزو الفكري","الصهيونية","العلمانية"],a:0,s:"المحاضرة 14 صفحة 6"},
+  {l:"المحاضرة الرابعة عشر",q:"أرسل عدداً من المنصرين إلى مراكش بالمغرب:",o:["القسيس فرانس","القديس فرانسيس","ريمون لول","القس سيمون"],a:1,s:"المحاضرة 14 صفحة 6"},
+  {l:"المحاضرة الرابعة عشر",q:"من بواعث التنصير:",o:["الباعث الديني","الحقد الصليبي","الاستعمار","كل ما سبق صحيح"],a:3,s:"المحاضرة 14 صفحة 8"},
+  {l:"المحاضرة الرابعة عشر",q:"\"إن ............ لما انبسط في العصور الوسطى أقام سدا في وجه انتشار النصرانية، ثم امتد إلى البلاد التي كانت خاضعة لصولجانها\":",o:["الإسلام","اليهودية","الإلحاد","الجيش"],a:0,s:"المحاضرة 14 صفحة 9"},
+  {l:"المحاضرة الرابعة عشر",q:"من وسائل التنصير مجالي التعليم والعلاج والخدمة الاجتماعية والإعلام:",o:["وسائل مساعدة","وسائل غير حقيقية","وسائل مباشرة","وسائل صائبة"],a:0,s:"المحاضرة 14 صفحة 10"},
+  {l:"المحاضرة الرابعة عشر",q:"ما يقوم به فرد أو مجموعة من المبشرين المتفرغين لهذه الوظيفة ممن توظفهم الكنيسة وعاظاً لنشر النصرانية؛ هو:",o:["وسيلة","وسيلة التعليم","وسائل التنصير المساعدة","التنصير المباشر"],a:3,s:"المحاضرة 14 صفحة 10"},
+  {l:"المحاضرة الرابعة عشر",q:"من آثار التنصير في بلاد المسلمين أنه:",o:["كسر كل بحث عن الإسلام الحقيقي","كسر كل دعوة للوحدة الإسلامية","ردع كل جهد للاستقلال","شوه صورة القومية والوطنية"],a:1,s:"المحاضرة 14 صفحة 12"},
+
+  // ===== Miscellaneous =====
+  {l:"أسئلة متفرقة",q:"البناء الذاتي للشخصية الإنسانية يحتاج إلى ثقافة:",o:["متميزة قوية شاملة","اجتماعية","عامة","صحية"],a:0,s:"أسئلة متفرقة"},
+  {l:"أسئلة متفرقة",q:"تغذية الفكر البشري تتم من خلال:",o:["الحرص على معرفة كل شيء","التزود بالمعلومات الصحيحة ومعالجتها","الحرص على كل ما يغذي الإنسان","جمع المعلومات بأي وسيلة"],a:1,s:"أسئلة متفرقة"},
+  {l:"أسئلة متفرقة",q:"أول ظهور للتأثر بحضارة الغرب كان في:",o:["العصر العباسي","الدولة المملوكية","أواخر عهد العثمانيين","عصور الاستعمار"],a:2,s:"أسئلة متفرقة"},
+  {l:"أسئلة متفرقة",q:"عند التعارض بين الروابط البشرية نقدم رابطة:",o:["الإنسانية","الأسرة","الدين","العهد والميثاق"],a:2,s:"أسئلة متفرقة"},
+  {l:"أسئلة متفرقة",q:"\"ما أثر عن النبي عليه الصلاة والسلام من قول أو عمل أو ....... أو صفة خلقية أو خلقية أو سيرة\":",o:["إقرار","قضاء","فتيا","خطاب"],a:0,s:"أسئلة متفرقة"}
+];
+
+// State
+let state = {
+  questions: [],
+  currentIndex: 0,
+  score: 0,
+  answers: [],
+  mode: 'all',
+  order: 'ordered',
+  answered: false
+};
+
+// Mode/order selection
+document.querySelectorAll('.mode-btn[data-mode]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.mode-btn[data-mode]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.mode = btn.dataset.mode;
+  });
+});
+document.querySelectorAll('.mode-btn[data-order]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.mode-btn[data-order]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.order = btn.dataset.order;
+  });
+});
+
+document.getElementById('totalQuestions').textContent = QUESTIONS.length;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startQuiz() {
+  let pool = [...QUESTIONS];
+  if (state.order === 'shuffled') pool = shuffle(pool);
+  if (state.mode === '20') pool = pool.slice(0, 20);
+  else if (state.mode === '50') pool = pool.slice(0, 50);
+
+  state.questions = pool;
+  state.currentIndex = 0;
+  state.score = 0;
+  state.answers = [];
+  state.answered = false;
+
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('resultsScreen').style.display = 'none';
+  document.getElementById('quizScreen').style.display = 'block';
+  document.getElementById('totalQ').textContent = state.questions.length;
+  document.getElementById('liveTotal').textContent = state.questions.length;
+  renderQuestion();
+}
+
+function renderQuestion() {
+  state.answered = false;
+  const q = state.questions[state.currentIndex];
+  document.getElementById('currentQ').textContent = state.currentIndex + 1;
+  document.getElementById('lectureTag').textContent = q.l;
+  document.getElementById('questionText').textContent = q.q;
+
+  const progress = ((state.currentIndex) / state.questions.length) * 100;
+  document.getElementById('progressFill').style.width = progress + '%';
+
+  const letters = ['أ', 'ب', 'ج', 'د'];
+  const optionsContainer = document.getElementById('optionsContainer');
+  optionsContainer.innerHTML = '';
+  q.o.forEach((opt, i) => {
+    const div = document.createElement('button');
+    div.className = 'option';
+    div.innerHTML = `<span class="option-letter">${letters[i]}</span><span class="option-text">${opt}</span>`;
+    div.onclick = () => selectAnswer(i);
+    optionsContainer.appendChild(div);
+  });
+
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').innerHTML = '';
+  document.getElementById('nextBtn').style.display = 'none';
+  document.getElementById('liveScore').textContent = state.score;
+}
+
+function selectAnswer(selectedIdx) {
+  if (state.answered) return;
+  state.answered = true;
+  const q = state.questions[state.currentIndex];
+  const correct = selectedIdx === q.a;
+  if (correct) state.score++;
+  state.answers.push({ q, selected: selectedIdx, correct });
+
+  const options = document.querySelectorAll('.option');
+  options.forEach((opt, i) => {
+    opt.classList.add('disabled');
+    if (i === q.a) opt.classList.add('correct');
+    else if (i === selectedIdx) opt.classList.add('incorrect');
+  });
+
+  const feedback = document.getElementById('feedback');
+  feedback.className = 'feedback show ' + (correct ? 'correct' : 'incorrect');
+  feedback.innerHTML = correct
+    ? `<span class="feedback-icon">✓</span> إجابة صحيحة. أحسنت!<span class="feedback-source">${q.s}</span>`
+    : `<span class="feedback-icon">✗</span> الإجابة الصحيحة: ${q.o[q.a]}<span class="feedback-source">${q.s}</span>`;
+
+  document.getElementById('liveScore').textContent = state.score;
+  document.getElementById('nextBtn').style.display = 'inline-block';
+  document.getElementById('nextBtn').textContent =
+    state.currentIndex === state.questions.length - 1 ? 'عرض النتيجة ←' : 'السؤال التالي ←';
+}
+
+function nextQuestion() {
+  if (state.currentIndex < state.questions.length - 1) {
+    state.currentIndex++;
+    renderQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function showResults() {
+  document.getElementById('quizScreen').style.display = 'none';
+  document.getElementById('resultsScreen').style.display = 'block';
+  const total = state.questions.length;
+  const percent = Math.round((state.score / total) * 100);
+  document.getElementById('finalScore').textContent = state.score;
+  document.getElementById('finalTotal').textContent = total;
+  document.getElementById('resultsScore').style.setProperty('--score-percent', percent + '%');
+
+  let grade = '';
+  if (percent >= 90) grade = 'ممتاز — تمكن رفيع من المادة';
+  else if (percent >= 75) grade = 'جيد جداً — أداء قوي';
+  else if (percent >= 60) grade = 'جيد — تحتاج لمراجعة بعض الأبواب';
+  else if (percent >= 50) grade = 'مقبول — راجع المحاضرات بعناية';
+  else grade = 'يحتاج إلى مزيد من الدراسة والمراجعة';
+  document.getElementById('gradeText').textContent = grade + ` (${percent}٪)`;
+
+  // Build review
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = '';
+  state.answers.forEach((ans, i) => {
+    const div = document.createElement('div');
+    div.className = 'review-item ' + (ans.correct ? 'correct' : 'incorrect');
+    const letters = ['أ', 'ب', 'ج', 'د'];
+    div.innerHTML = `
+      <div class="review-q">${i + 1}. ${ans.q.q}</div>
+      <div class="review-a">إجابتك: <strong class="${ans.correct ? 'review-correct' : 'review-incorrect'}">${letters[ans.selected]}) ${ans.q.o[ans.selected]}</strong></div>
+      ${!ans.correct ? `<div class="review-a">الصحيحة: <strong class="review-correct">${letters[ans.q.a]}) ${ans.q.o[ans.q.a]}</strong></div>` : ''}
+      <div class="review-a" style="font-size:0.8rem;opacity:0.7;">${ans.q.s} • ${ans.q.l}</div>
+    `;
+    reviewList.appendChild(div);
+  });
+
+  document.getElementById('reviewSection').style.display = 'none';
+  document.getElementById('reviewBtn').textContent = 'مراجعة الإجابات';
+}
+
+function toggleReview() {
+  const sec = document.getElementById('reviewSection');
+  const btn = document.getElementById('reviewBtn');
+  if (sec.style.display === 'none') {
+    sec.style.display = 'block';
+    btn.textContent = 'إخفاء المراجعة';
+    sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    sec.style.display = 'none';
+    btn.textContent = 'مراجعة الإجابات';
+  }
+}
+
+function restartQuiz() {
+  document.getElementById('resultsScreen').style.display = 'none';
+  document.getElementById('startScreen').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Keyboard support
+document.addEventListener('keydown', (e) => {
+  const quizActive = document.getElementById('quizScreen').style.display === 'block';
+  if (!quizActive) return;
+  if (!state.answered && ['1', '2', '3', '4'].includes(e.key)) {
+    const idx = parseInt(e.key) - 1;
+    const q = state.questions[state.currentIndex];
+    if (idx < q.o.length) selectAnswer(idx);
+  } else if (state.answered && (e.key === 'Enter' || e.key === ' ')) {
+    e.preventDefault();
+    nextQuestion();
+  }
+});
+</script>
+</body>
+</html>
